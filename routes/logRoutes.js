@@ -10,4 +10,10 @@ router.get("/", logIndex);
 // New Route
 router.get("/new", logNew);
 
+// Show Route
+router.get("/:id", logShow);
+
+// Create Route
+router.post("/", logCreate);
+
 module.exports = router;
