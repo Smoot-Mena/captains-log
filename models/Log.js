@@ -6,7 +6,7 @@ const logSchema = new Schema({
     title: {type:String},
     entry: {type:String},
     shipIsBroken: {type:Boolean}
-});
+}, { timestamps: true });
 
 const Log = mongoose.model("logs", logSchema);
 

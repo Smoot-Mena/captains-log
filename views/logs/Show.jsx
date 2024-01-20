@@ -3,7 +3,8 @@ import React from "react";
 const Show = ( {log} ) => {
     return ( 
         <section>
-            <h1>Show Page</h1>
+            <h1>Show Page <span>
+                <a href="/logs">↩ Back Home</a></span></h1>
             <h3>Log title: {log.title}</h3>
             <p>Log entry: {log.entry}</p>
             <p>{log.shipIsBroken ? "The ship is broken" : "The ship is not broken"}</p>

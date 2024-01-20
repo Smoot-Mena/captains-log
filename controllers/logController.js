@@ -1,4 +1,5 @@
 const Log = require("../models/Log");
+const logs = require("../models/logs");
 
 // Root Route
 const logIndex = async (req, res) => {
@@ -6,7 +7,6 @@ const logIndex = async (req, res) => {
 
     try {
         data = await Log.find();
-        console.log(data);
     } catch (error) {
         console.error(error);
     }
@@ -25,16 +25,47 @@ const logShow = async (req, res) => {
     res.render("logs/Show", { log: data });
 };
 
+// Create Route
 const logCreate = async (req, res) => {
-    if (req.body.shipIsBroken == "on") {
-        req.body.shipIsBroken = true;
-    } else {
-        req.body.shipIsBroken = false;
-    }
+    req.body.shipIsBroken == "on" ? true : false;
     await Log.create(req.body);
     res.redirect("/logs");
 }
 
+// Edit Route
+const logEdit = async (req, res) => {
+    const data = await Log.findById(req.params.id);
+    res.render("logs/Edit", { log: data });
+};
+
+// Update Route
+const logUpdate = async (req, res) => {
+    
+    req.body.shipIsBroken == "on" ? true : false;
+    await Log.findByIdAndUpdate(req.params.id, req.body);
+    res.redirect(`/logs/${req.params.id}`);
+};
+
+// Delete Route
+const logDelete = async (req, res) => {
+    await Log.findByIdAndDelete(req.params.id);
+    res.redirect("/logs");
+};
+
+// Clear Route
+const logClear = async (req, res) => {
+    await Log.deleteMany();
+    res.redirect("/logs");
+};
+
+// Seed Route
+const logSeed = async (req, res) => {
+    console.log("deleting everything");
+    await Log.deleteMany();
+    await Log.create(logs);
+    res.redirect("/logs");
+};
+
 module.exports = {
-    logIndex, logNew, logShow, logCreate
+    logIndex, logNew, logShow, logCreate, logEdit, logUpdate, logDelete, logClear, logSeed
 };
