@@ -27,7 +27,7 @@ const mealShow = async (req, res) => {
 
 // Create Route
 const mealCreate = async (req, res) => {
-    req.body.servedHot == "on" ? true : false;
+    req.body.servedHot == "on" ? req.body.servedHot = true : req.body.servedHot = false;
     await Meal.create(req.body);
     res.redirect("/meals");
 }
@@ -41,7 +41,7 @@ const mealEdit = async (req, res) => {
 // Update Route
 const mealUpdate = async (req, res) => {
     
-    req.body.servedHot == "on" ? true : false;
+    req.body.servedHot == "on" ? req.body.servedHot = true : req.body.servedHot = false;
     await Meal.findByIdAndUpdate(req.params.id, req.body);
     res.redirect(`/meals/${req.params.id}`);
 };

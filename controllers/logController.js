@@ -27,7 +27,7 @@ const logShow = async (req, res) => {
 
 // Create Route
 const logCreate = async (req, res) => {
-    req.body.shipIsBroken == "on" ? true : false;
+    req.body.shipIsBroken == "on" ? req.body.shipIsBroken = true : req.body.shipIsBroken = false;
     await Log.create(req.body);
     res.redirect("/logs");
 }
@@ -41,7 +41,7 @@ const logEdit = async (req, res) => {
 // Update Route
 const logUpdate = async (req, res) => {
     
-    req.body.shipIsBroken == "on" ? true : false;
+    req.body.shipIsBroken == "on" ? req.body.shipIsBroken = true : req.body.shipIsBroken = false;
     await Log.findByIdAndUpdate(req.params.id, req.body);
     res.redirect(`/logs/${req.params.id}`);
 };
